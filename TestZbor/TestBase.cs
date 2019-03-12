@@ -27,7 +27,10 @@ namespace TestZbor
 			webDriver.Navigate().GoToUrl("https://zbor.md");
 			webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[1]/div/div[1]/div/div/div[2]/label")).Click();
 			var dest1 = webDriver.FindElement(By.Id("dest-1"));
-			
+
+			Wait(TimeSpan.FromSeconds(10), (webDriver) => webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div/div[1]/div/div[1]/div/div/div[2]/label")).Displayed);
+
+
 		}
 
 		[TearDown]

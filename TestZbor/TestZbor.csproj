@@ -58,6 +58,7 @@
     <Compile Include="Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
+    <Compile Include="VarClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
