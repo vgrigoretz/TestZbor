@@ -21,7 +21,7 @@ namespace TestZbor
 		[TearDown]
 		public void CloseDriver()
 		{
-			driver.Quit();
+			//driver.Quit();
 		}
 	}
 }

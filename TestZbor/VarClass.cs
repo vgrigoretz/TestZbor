@@ -54,6 +54,7 @@ namespace TestZbor
 			string returnXPath = "//span[@data-value='" + returnDate + "']";
 			var date2 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(returnXPath)));
 			//driver.SwitchTo().ActiveElement(); - unselectable on "inactive" dates
+			//date2 = driver.FindElement(By.CssSelector("//span[class*=active.data-value=20190503]:not([class*=other-month'])"));
 			date2.Click();
 		}
 
