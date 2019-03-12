@@ -1,10 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestZbor
 {
@@ -17,6 +12,12 @@ namespace TestZbor
 		{
 			this.driver = driver;
 			this.wait = wait;
+		}
+
+		public void SelectTrip(By tripType)
+		{
+			driver.Navigate().GoToUrl("https://zbor.md");
+			driver.FindElement(tripType).Click();
 		}
 
 		public void SourceCity(string city)
@@ -41,17 +42,48 @@ namespace TestZbor
 			destCity.SendKeys(Keys.Enter);
 		}
 
-		public void GoDate(string date)
+		public void GoDate(string goDate)
 		{
-			string myXPath = "//span[@data-value='" + date + "']";
-			wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(myXPath))).Click();
+			string goXPath = "//span[@data-value='" + goDate + "']";
+			var date1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(goXPath)));
+			date1.Click();
 		}
 
 		public void ReturnDate(string returnDate)
 		{
-			driver.FindElement(By.Id("dt2")).Click();
-			string myXPath = "//span[@data-value='" + returnDate + "']";
-			wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(myXPath))).Click();
+			string returnXPath = "//span[@data-value='" + returnDate + "']";
+			var date2 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(returnXPath)));
+			//driver.SwitchTo().ActiveElement(); - unselectable on "inactive" dates
+			date2.Click();
+		}
+
+		public void AddPersons(int nrPersons)
+		{
+			var person = driver.FindElement(By.Id("persons-summary"));
+			person.Click();
+
+			for (int i = 1; i < nrPersons; i ++)
+			{
+				driver.FindElement(By.ClassName("person-add")).Click();
+			}
+		}
+
+		public void Search()
+		{
+			var search = driver.FindElement(By.Id("search"));
+			search.Click();
+		}
+
+		public void sortCheapest()
+		{
+			By cheapest = By.CssSelector(".btn.warning");
+			wait.Until(ExpectedConditions.ElementToBeClickable(cheapest)).Click();
+		}
+
+		public void sortConvinient()
+		{
+			By recommended = By.Id("recommended");
+			wait.Until(ExpectedConditions.ElementToBeClickable(recommended)).Click();
 		}
 	}
 }
